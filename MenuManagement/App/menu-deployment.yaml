@@ -17,17 +17,22 @@ spec:
     spec:
       containers:
       - name: webapi
-        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.menumanagement:v.0.0.12
+        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.menumanagement:v.0.0.14
         ports:
         - containerPort: 5136
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: Production
-        - name: ConnectionStrings__DefaultConnection
+        - name: ACCEPT_EULA
           valueFrom:
-            configMapKeyRef:
-              name: menu-config
-              key: appsettings.json
+            secretKeyRef:
+              name: menu-db-secret  # Correct secret name
+              key: ACCEPT_EULA
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: menu-db-secret  # Correct secret name
+              key: SA_PASSWORD
         - name: RABBITMQ_HOST
           value: rabbitmq.eatfresh.svc.cluster.local
         - name: RABBITMQ_PORT
