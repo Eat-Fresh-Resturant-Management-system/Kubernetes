@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: table-deployment
+  namespace: eatfresh
+  labels:
+    app: tablebooking
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tablebooking
+  template:
+    metadata:
+      labels:
+        app: tablebooking
+    spec:
+      containers:
+      - name: tablebooking
+        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.tablebookingservice:v0.3
+        ports:
+        - containerPort: 4000
+        env:
+        - name: MONGODB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongo-db-secret
+              key: MONGO_INITDB_ROOT_USERNAME
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-db-secret
+              key: MONGO_INITDB_ROOT_PASSWORD
+        - name: MONGODB_DBNAME
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-config
+              key: dbname
+        - name: MONGODB_HOSTNAME
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-config
+              key: hostname
+        - name: REL_URL_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: table-config
+              key: REL_URL_PATH
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "200Mi"
+          limits:
+            cpu: "500m"
+            memory: "500Mi"
+      imagePullSecrets:
+      - name: my-registry-credentials
