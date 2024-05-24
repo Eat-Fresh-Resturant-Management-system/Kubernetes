@@ -4,20 +4,20 @@ metadata:
   name: order-deployment
   namespace: eatfresh
   labels:
-    app: webapi
+    app: webapi-order
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: webapi
+      app: webapi-order
   template:
     metadata:
       labels:
-        app: webapi
+        app: webapi-order
     spec:
       containers:
-      - name: webapi
-        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.menumanagement:v.0.0.14
+      - name: webapi-order
+        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.orderprocessing:0.0.07.v
         ports:
         - containerPort: 5126
         env:
