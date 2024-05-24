@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: menu-db-statefulset
+  namespace: eatfresh
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sqlserver
+  serviceName: menu-db-service
+  template:
+    metadata:
+      labels:
+        app: sqlserver
+    spec:
+      containers:
+      - name: sqlserver
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+        - containerPort: 1433
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: menu-db-secret
+              key: SA_PASSWORD
+        - name: MSSQL_PID
+          value: "Express"
+        volumeMounts:
+        - mountPath: /var/opt/mssql
+          name: sqlstorage
+        resources:
+          requests:
+            memory: "500Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1"
+      volumes:
+      - name: sqlstorage
+        persistentVolumeClaim:
+          claimName: menu-pvc
