@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sql-server
+  namespace: eatfresh
+spec:
+  serviceName: "sql-service"
+  replicas: 1
+  podManagementPolicy: Parallel
+  selector:
+    matchLabels:
+      app: sqlserver
+  template:
+    metadata:
+      labels:
+        app: sqlserver
+    spec:
+      containers:
+      - name: sqlserver
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+        - containerPort: 1433
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sql-secret
+              key: SA_PASSWORD
+        - name: MSSQL_PID
+          value: "Express"
+        volumeMounts:
+        - mountPath: /var/opt/mssql
+          name: sqlstorage
+        resources:
+          requests:
+            memory: "1Gi"  # Ensure sufficient memory
+            cpu: "250m"
+          limits:
+            memory: "2Gi"  # Ensure sufficient memory
+            cpu: "500m"
+  volumeClaimTemplates:
+  - metadata:
+      name: sqlstorage
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 512Mi
+      storageClassName: local-path
