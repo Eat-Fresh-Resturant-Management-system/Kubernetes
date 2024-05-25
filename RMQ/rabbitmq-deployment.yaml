@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-deployment
+  namespace: eatfresh
+  labels:
+    app: rabbitmq-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq-pod
+  template:
+    metadata:
+      labels:
+        app: rabbitmq-pod
+    spec:
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3.13.2-management
+          ports:
+            - containerPort: 5672
+              name: amqp-port
+            - containerPort: 15672
+              name: management-port
+          resources:
+            limits:
+              cpu: "0.1"
+              memory: "128Mi"
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              value: guest
+            - name: RABBITMQ_DEFAULT_PASS
+              value: guest
