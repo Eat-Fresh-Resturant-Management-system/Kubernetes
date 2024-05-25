@@ -26,12 +26,12 @@ spec:
         - name: ACCEPT_EULA
           valueFrom:
             secretKeyRef:
-              name: menu-db-secret  # Correct secret name
+              name: sql-secret  # Correct secret name
               key: ACCEPT_EULA
         - name: SA_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: menu-db-secret  # Correct secret name
+              name: sql-secret # Correct secret name
               key: SA_PASSWORD
         - name: RABBITMQ_HOST
           value: rabbitmq.eatfresh.svc.cluster.local

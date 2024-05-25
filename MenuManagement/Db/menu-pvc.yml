@@ -1,12 +1,13 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: menu-pvc
+  name: sql-pvc
   namespace: eatfresh
 spec:
   storageClassName: "local-path"
+  volumeName: sql-pv
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 512Mi
+      storage: 500Mi  

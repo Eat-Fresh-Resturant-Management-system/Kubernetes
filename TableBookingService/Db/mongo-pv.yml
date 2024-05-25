@@ -5,7 +5,7 @@ metadata:
 spec:
   storageClassName: "local-path"
   capacity:
-    storage: 1Gi  
+    storage: 512Mi  
   #volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
