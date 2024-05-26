@@ -5,7 +5,7 @@ metadata:
   namespace: eatfresh
 spec:
   selector:
-    app: webapi-order
+    app: weborder-pod
   ports:
     - name: port1
       protocol: TCP
