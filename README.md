@@ -48,4 +48,20 @@ Important things to note about this service:
 
 #### Anything else
 
+## API Endpoints and Port Numbers
 
+### Endpoints
+| TableBooking     | Path            |
+|------------------|-----------------|
+| Create a Table   | /CreateTable    |
+
+### Port Numbers
+| Service         | Container port Number |
+|-----------------|-----------------|
+| Table booking   | 3146            |
+| Menu            | 3000, 5136      |
+| Order           | 7000, 5126      |
+| API Gateway     | ~5660~ (WIP)    |
+| BMQ             | 5672            |
+| Mongo           | 27017 / 8081    |
+| SQL             | 1443            |
