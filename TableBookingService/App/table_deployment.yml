@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: tablebooking
-        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.tablebookingservice:latest
+        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.tablebookingservice:V0.5
         ports:
         - containerPort: 4000
         env:
@@ -49,9 +49,9 @@ spec:
         resources:
           requests:
             cpu: "100m"
-            memory: "200Mi"
+            memory: "128Mi"
           limits:
-            cpu: "500m"
-            memory: "500Mi"
+            cpu: "200m"
+            memory: "200Mi"
       imagePullSecrets:
       - name: my-registry-credentials
