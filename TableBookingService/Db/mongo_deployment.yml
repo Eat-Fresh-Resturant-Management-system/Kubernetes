@@ -35,10 +35,10 @@ spec:
         resources:
           requests:
             cpu: "250m"
-            memory: "128Mi"
+            memory: "64Mi"
           limits:
             cpu: "500m"
-            memory: "256Mi"
+            memory: "128Mi"
       volumes:
       - name: mongo-volume
         persistentVolumeClaim:

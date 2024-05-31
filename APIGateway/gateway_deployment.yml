@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-deployment
+  namespace: eatfresh
+  labels:
+    app: apigateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apigateway
+  template:
+    metadata:
+      labels:
+        app: apigateway
+    spec:
+      containers:
+      - name: apigateway
+        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.tablebookingservice:latest
+        ports:
+        - containerPort: 5000
+          valueFrom:
+            configMapKeyRef:
+              name: gateway-config
+              key: REL_URL_PATH
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "64Mi"
+          limits:
+            cpu: "400m"
+            memory: "128Mi"
+      imagePullSecrets:
+      - name: my-registry-credentials
