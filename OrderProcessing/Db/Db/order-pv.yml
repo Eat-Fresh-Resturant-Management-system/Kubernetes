@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: order-sql-pv
+spec:
+  storageClassName: "local-path"
+  capacity:
+    storage: 512Mi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  hostPath:
+    path: "/mnt/data/ordersqlserver"
+  claimRef:
+    namespace: eatfresh
+    name: order-sql-pvc

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: tablebooking
-        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.tablebookingservice:V0.6
+        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.tablebookingservice:latest
         ports:
         - containerPort: 4000
         env:

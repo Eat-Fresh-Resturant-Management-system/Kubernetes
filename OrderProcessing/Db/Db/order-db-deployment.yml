@@ -1,22 +1,20 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
-  name: sql-server
+  name: order-deployment
   namespace: eatfresh
 spec:
-  serviceName: "sql-service"
   replicas: 1
-  podManagementPolicy: Parallel
   selector:
     matchLabels:
-      app: sqlserver
+      app: ordersqlserver
   template:
     metadata:
       labels:
-        app: sqlserver
+        app: ordersqlserver
     spec:
       containers:
-      - name: sqlserver
+      - name: ordersqlserver
         image: mcr.microsoft.com/mssql/server:2019-latest
         ports:
         - containerPort: 1433
@@ -26,27 +24,21 @@ spec:
         - name: SA_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: sql-secret
+              name: order-sql-secret
               key: SA_PASSWORD
         - name: MSSQL_PID
           value: "Express"
         volumeMounts:
-        - mountPath: /var/opt/mssql
-          name: sqlstorage
+        - mountPath: /var/lib/mysql
+          name: order-sqlstorage
         resources:
           requests:
-            memory: "1Gi"  # Ensure sufficient memory
+            memory: "512Mi"
             cpu: "250m"
           limits:
-            memory: "2Gi"  # Ensure sufficient memory
+            memory: "1Gi"
             cpu: "500m"
-  volumeClaimTemplates:
-  - metadata:
-      name: sqlstorage
-    spec:
-      accessModes:
-        - ReadWriteOnce
-      resources:
-        requests:
-          storage: 512Mi
-      storageClassName: local-path
+      volumes:
+      - name: order-sqlstorage
+        persistentVolumeClaim:
+          claimName: order-sql-pvc

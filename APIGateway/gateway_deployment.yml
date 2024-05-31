@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: apigateway
-        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.tablebookingservice:latest
+        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.apigateway:latest
         ports:
         - containerPort: 5000
         env:
