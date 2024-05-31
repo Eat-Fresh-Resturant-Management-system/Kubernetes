@@ -20,6 +20,8 @@ spec:
         image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.tablebookingservice:latest
         ports:
         - containerPort: 5000
+        env:
+        - name: REL_URL_PATH
           valueFrom:
             configMapKeyRef:
               name: gateway-config
