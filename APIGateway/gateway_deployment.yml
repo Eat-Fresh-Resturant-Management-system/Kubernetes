@@ -28,10 +28,10 @@ spec:
               key: REL_URL_PATH
         resources:
           requests:
-            cpu: "200m"
-            memory: "64Mi"
+            cpu: "100m"
+            memory: "256Mi"
           limits:
-            cpu: "400m"
-            memory: "128Mi"
+            cpu: "1"
+            memory: "512Mi"
       imagePullSecrets:
       - name: my-registry-credentials

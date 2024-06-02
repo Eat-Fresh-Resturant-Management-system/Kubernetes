@@ -1,8 +1,9 @@
 # apiVersion: v1
 # kind: ConfigMap
 # metadata:
-#   name: sql-config
+#   name: sqlserver-config
 #   namespace: eatfresh
 # data:
-#   database-name: "master"
-#   hostname: sql-service
+#   mssql.conf: |
+#     [memory]
+#     max server memory (MB) = 512  # Adjust as needed

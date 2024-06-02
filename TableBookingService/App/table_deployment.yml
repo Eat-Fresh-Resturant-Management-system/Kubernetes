@@ -46,12 +46,32 @@ spec:
             configMapKeyRef:
               name: table-config
               key: REL_URL_PATH
+        - name: RMQ_USER
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-secret
+              key: RMQ_USER
+        - name: RMQ_PASS
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-secret
+              key: RMQ_PASS
+        - name: RMQ_HOST
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-secret
+              key: RMQ_HOST
+        - name: RMQ_PORT
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-secret
+              key: RMQ_PORT
         resources:
           requests:
             cpu: "100m"
-            memory: "128Mi"
+            memory: "64Mi"
           limits:
-            cpu: "200m"
-            memory: "200Mi"
+            cpu: "300m"
+            memory: "128Mi"
       imagePullSecrets:
       - name: my-registry-credentials

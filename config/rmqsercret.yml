@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rabbitmq-secret
+  namespace: eatfresh
+data:
+  RMQ_USER: Z3Vlc3Q=  # base64 encoded 'guest'
+  RMQ_PASS: Z3Vlc3Q=  # base64 encoded 'guest'
+  RMQ_HOST: cmFiYml0bXEucmFiYml0bXEuc3ZjLmNsdXN0ZXIubG9jYWw=  # base64 encoded 'rabbitmq.rabbitmq.svc.cluster.local'
+  RMQ_PORT: NTY3Mg==  # base64 encoded '5672'
