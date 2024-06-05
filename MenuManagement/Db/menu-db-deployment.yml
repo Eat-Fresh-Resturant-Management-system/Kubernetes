@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sql-deployment
+  name: menu-sql-deployment
   namespace: eatfresh
 spec:
   replicas: 1
@@ -17,14 +17,14 @@ spec:
       - name: sqlserver
         image: mcr.microsoft.com/mssql/server:2019-latest
         ports:
-        - containerPort: 1433
+        - containerPort: 1432
         env:
         - name: ACCEPT_EULA
           value: "Y"
         - name: SA_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: sql-secret
+              name: menu-sql-secret
               key: SA_PASSWORD
         - name: MSSQL_PID
           value: "Express"
@@ -41,4 +41,4 @@ spec:
       volumes:
       - name: sqlstorage
         persistentVolumeClaim:
-          claimName: sql-pvc
+          claimName: menu-sql-pvc

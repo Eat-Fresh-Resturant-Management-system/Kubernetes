@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-deployment
+  name: order-app-deployment
   namespace: eatfresh
   labels:
     app: weborder-deployment
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: weborder
-        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.orderprocessing:0.0.11.v
+        image: registry.gitlab.au.dk/wao-exercises1/eatfresh/eatfresh.orderprocessing:0.0.15.v
         ports:
         - containerPort: 5126
         env:
@@ -26,19 +26,19 @@ spec:
         - name: ACCEPT_EULA
           valueFrom:
             secretKeyRef:
-              name: sql-secret-order
+              name: order-sql-secret
               key: ACCEPT_EULA
-        - name: MSSQL_SA_PASSWORD
+        - name: SA_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: sql-secret-order
-              key: MSSQL_SA_PASSWORD       
+              name: order-sql-secret
+              key: SA_PASSWORD       
         resources:
           requests:
-            cpu: "150m"
+            cpu: "100m"
             memory: "64Mi"
           limits:
-            cpu: "600m"
+            cpu: "200m"
             memory: "128Mi"
         volumeMounts:
         - name: config-volume-order
