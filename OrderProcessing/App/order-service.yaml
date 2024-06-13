@@ -7,8 +7,6 @@ spec:
   selector:
     app: weborder-pod
   ports:
-    - name: port1
-      protocol: TCP
+    - protocol: TCP
       port: 5051
       targetPort: 5126
-  type: ClusterIP
