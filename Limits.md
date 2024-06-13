@@ -132,5 +132,5 @@ This updated plan removes the external frontend application with Auth0, uses Sta
 | Order Processing | eatfresh  | 100m         | 200m       | 64Mi            | 128Mi         | -                | -              |
 | Order SQL Server | eatfresh  | 250m         | 500m       | 512Mi           | 1Gi           | 500Mi            | 512Mi          |
 | RabbitMQ         | rabbitmq  | 250m         | 500m       | 128Mi           | 512Mi         | -                | -              |
-| Table Booking    | eatfresh  | 100m         | 300m       | 128Mi            | 64Mi         | -                | -              |
+| Table Booking    | eatfresh  | 100m         | 300m       | 64Mi            | 128Mi         | -                | -              |
 | MongoDB          | eatfresh  | 250m         | 500m       | 128Mi           | 256Mi         | 500Mi            | 512Mi          |

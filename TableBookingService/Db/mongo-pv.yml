@@ -6,7 +6,6 @@ spec:
   storageClassName: "local-path"
   capacity:
     storage: 512Mi  
-  #volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
