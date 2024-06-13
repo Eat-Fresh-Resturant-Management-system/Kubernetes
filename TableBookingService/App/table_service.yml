@@ -4,6 +4,7 @@ metadata:
   name: table-service
   namespace: eatfresh
 spec:
+  type: ClusterIP
   selector:
     app: tablebooking
   ports:

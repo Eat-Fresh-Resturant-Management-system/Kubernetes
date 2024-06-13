@@ -4,6 +4,7 @@ metadata:
   name: order-service
   namespace: eatfresh
 spec:
+  type: ClusterIP
   selector:
     app: weborder-pod
   ports:
